@@ -30,7 +30,6 @@ var desk = (function () {
         onIceCandidate(that){
             this.rtcPeerConnection.onicecandidate = event => {
                 if (event.candidate) {
-                    console.log('sending ice candidate');
                     socket.emit('candidate', {
                         label: event.candidate.sdpMLineIndex,
                         id: event.candidate.sdpMid,
@@ -44,20 +43,16 @@ var desk = (function () {
         setupSocketHandlers(that){
             socket.on('created',function(){
                 that.type = 'host';
-                console.log('Host ready');
-
             });
 
             socket.on('joined', function(room) {
                 that.type = 'client';
-                console.log('Client ready');
                 socket.emit('ready',room);
             });
 
             socket.on('createOffer',function(room){
                 if(that.type=='host'){
                     that.createOffer(that).then(offer => {
-                        console.log(offer);
                         socket.emit('offer',{room:room, offer:offer});
                     });
                 }
@@ -66,7 +61,6 @@ var desk = (function () {
             socket.on('sendOffer',function(event) {
                 if(that.type=='client'){
                     that.createAnswer(that,event.offer).then(answer => {
-                        console.log(answer);
                         socket.emit('answer',{room:event.room, answer: answer});
                     });   
                 }
@@ -97,7 +91,6 @@ var desk = (function () {
         }
 
         async createAnswer(that,offer) {
-            console.log(offer);
             this.rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(offer));
         
             return await this.rtcPeerConnection.createAnswer()
@@ -109,7 +102,6 @@ var desk = (function () {
         }
 
         setHostRemote(answer){
-            console.log(answer);
             this.rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(answer));
         }
 

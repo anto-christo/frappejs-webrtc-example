@@ -50,13 +50,9 @@ module.exports = {
         io.on('connection', function (socket) {
             frappe.db.bindSocketServer(socket);
 
-            socket.on('create or join', function (room) {
-                                
+            socket.on('create or join', function (room) {                
                 var myRoom = io.sockets.adapter.rooms[room] || { length: 0 };
-                var numClients = myRoom.length;
-        
-                console.log(room, ' has ', numClients+1, ' clients');
-        
+                var numClients = myRoom.length;        
                 if (numClients == 0) {
                     socket.join(room);
                     socket.emit('created');
@@ -64,7 +60,7 @@ module.exports = {
                     socket.join(room);
                     socket.emit('joined', room);
                 } else {
-                    console.log("Limited to only 2 connections");
+                    console.log("Limited to only 2 connections/room");
                 }
             });
 

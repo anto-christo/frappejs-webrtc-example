@@ -1,9 +1,9 @@
 module.exports = class WebRTC {
 
-    constructor(roomName){
+    constructor(){
         this.type;
         this.dataChannel;
-        this.roomName = roomName;
+        this.roomName;
         this.iceServers = {
             'iceServers': [{
                     'url': 'stun:stun.services.mozilla.com'

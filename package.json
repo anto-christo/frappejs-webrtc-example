@@ -1,0 +1,12 @@
+{
+  "name": "webrtc-collab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "repository": "https://github.com/anto-christo/WebRTC-Collab",
+  "author": "Anto Christopher",
+  "license": "MIT",
+  "dependencies": {
+    "frappejs": "^0.0.7"
+  }
+}

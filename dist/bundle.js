@@ -143,13 +143,21 @@ var desk = (function () {
         }
     };
 
-    var webRTC = new webrtc();
+    var webrtc$1 = /*#__PURE__*/Object.freeze({
+        default: webrtc,
+        __moduleExports: webrtc
+    });
+
+    var WebRTC = ( webrtc$1 && webrtc ) || webrtc$1;
+
+    var webRTC = new WebRTC();
 
     var socket$1 = io();
     window.socket = socket$1;
 
     var message = document.getElementById("message");
     var sendBtn = document.getElementById("send");
+    var messageList = document.getElementById("messageList");
 
     var id = prompt("Enter Name of Room:");
     webRTC.initConnection(id);
@@ -157,9 +165,20 @@ var desk = (function () {
     sendBtn.onclick = function(){
         var text = message.value;
         webRTC.sendData(text);
+        var div = document.createElement("div");
+        div.setAttribute("style","border:0.5px solid grey; margin:1%; padding:1%");
+        var data = document.createTextNode("You : "+text);
+        div.appendChild(data);
+        messageList.appendChild(div);
     };
 
-    webRTC.onDataReceive = data => console.log(data);
+    webRTC.onDataReceive = data => {
+        var div = document.createElement("div");
+        div.setAttribute("style","border:0.5px solid grey; margin:1%; padding:1%");
+        var data = document.createTextNode("Sender : "+data);
+        div.appendChild(data);
+        messageList.appendChild(div);
+    };
 
     var src = {
 

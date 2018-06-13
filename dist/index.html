@@ -24,14 +24,14 @@
 			<div class="modal-body">
 				<form>
 					<div class="form-group">
-						<label for="exampleFormControlInput1">Enter new Room name</label>
-						<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Eg:room1">
+						<label for="createRoomName">Enter new Room name</label>
+						<input type="email" class="form-control" id="createRoomName" placeholder="Eg:room1">
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Create</button>
+				<button type="button" class="btn btn-primary" id="createBtn">Create</button>
 			</div>
 			</div>
 		</div>
@@ -49,20 +49,20 @@
 			<div class="modal-body">
 				<form>
 					<div class="form-group">
-						<label for="exampleFormControlInput1">Enter existing Room name</label>
-						<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Eg:room1">
+						<label for="joinRoomName">Enter existing Room name</label>
+						<input type="email" class="form-control" id="joinRoomName" placeholder="Eg:room1">
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Join</button>
+				<button type="button" class="btn btn-primary" id="joinBtn">Join</button>
 			</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row" id="console">
 		<div class="col-sm-6">
 			<div class="card">
 			<div class="card-body">
@@ -84,9 +84,32 @@
 			</div>
 		</div>
 	</div>
+
+	<div id="chat">		
+		<div class="row" style="margin-top:1%">
+			<div class="col-sm-4">
+			</div>
+	
+			<div class="col-sm-4">
+				<center>
+					<form class="form-inline">
+						<div class="form-group mx-sm-3 mb-2">
+							<input type="text" class="form-control" id="message" placeholder="Type here..">
+						</div>
+						<button type="button" class="btn btn-primary mb-2" id="sendBtn">Send</button>
+					</form>
+				</center>
+			</div>
+	
+			<div class="col-sm-4">
+			</div>
+		</div>
+	</div>
 			  
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="bundle.js"></script>
   </body>
 </html>

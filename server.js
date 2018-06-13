@@ -5,5 +5,5 @@ server.start({
     connectionParams: {
       dbPath: 'test.db',
     },
-    staticPath: './src',
+    staticPath: './dist',
 });

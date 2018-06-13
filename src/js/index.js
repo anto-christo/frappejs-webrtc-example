@@ -4,27 +4,63 @@ var webRTC = new WebRTC();
 var socket = io();
 window.socket = socket;
 
-var message = document.getElementById("message");
-var sendBtn = document.getElementById("send");
-var messageList = document.getElementById("messageList");
+$('#chat').hide();
 
-var id = prompt("Enter Name of Room:");
-webRTC.initConnection(id);
+$('#createBtn').on('click',function(){
+    var room = $('#createRoomName').val();
+    webRTC.initConnection(room);
+    $('#createModal').modal('toggle');
+    $('#console').hide();
+    $('#chat').show();
+});
 
-sendBtn.onclick = function(){
-    var text = message.value;
-    webRTC.sendData(text);
-    var div = document.createElement("div");
-    div.setAttribute("style","border:0.5px solid grey; margin:1%; padding:1%");
-    var data = document.createTextNode("You : "+text);
-    div.appendChild(data);
-    messageList.appendChild(div);
-}
+$('#joinBtn').on('click',function(){
+    var room = $('#joinRoomName').val();
+    webRTC.initConnection(room);
+    $('#joinModal').modal('toggle');
+    $('#console').hide();
+    $('#chat').show();
+});
 
-webRTC.onDataReceive = data => {
-    var div = document.createElement("div");
-    div.setAttribute("style","border:0.5px solid grey; margin:1%; padding:1%");
-    var data = document.createTextNode("Sender : "+data);
-    div.appendChild(data);
-    messageList.appendChild(div);
+$('#sendBtn').on('click',function(){
+    var message = $('#message').val();
+
+    $('#chat').append(`<div class="row">
+                        <div class="col-sm-4">
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    You:${message}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                        </div>
+                    </div>`);
+
+    webRTC.sendData(message);
+
+    $('#message').val('');
+
+});
+
+webRTC.onDataReceive = message =>{
+    $('#chat').append(`<div class="row">
+                        <div class="col-sm-4">
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    Client:${message}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                        </div>
+                    </div>`);
 };
